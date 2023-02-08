@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Alle PflanzenTypen</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+  <h1>Pflanzentypen:</h1>
+  <hr class="border-2 border-top border-info">
+
+  <a th:href="@{/growmanager/v1/plantTypes/insert}" class="btn btn-info" role="button">Pflanzentyp einfügen</a>
+
+  <hr class="border-2 border-top border-info">
+  <table class="table" id="plantTypeTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Aktion</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr th:each="plantType: ${allPlantTypes}">
+      <td th:text="${plantType.id}"></td>
+      <td th:text="${plantType.name}"></td>
+      <td>
+        <!--<a th:href="" class="btn btn-info" role="button">Bearbeiten</a>
+        <a th:href="" class="btn btn-danger" role="button">Löschen</a>-->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
