@@ -1,6 +1,7 @@
 package at.itkolleg.growmanager.repositories;
 
 import at.itkolleg.growmanager.domain.Plant;
+import at.itkolleg.growmanager.exceptions.DuplicatedPlantException;
 import at.itkolleg.growmanager.exceptions.PlantNotFound;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,13 @@ public class DbAccessPlantJPA implements DbAccessPlant {
     }
 
     @Override
-    public Plant savePlant(Plant plant) {
-        return this.plantJPARepo.save(plant);
+    public Plant savePlant(Plant plant) throws DuplicatedPlantException {
+        try {
+            return this.plantJPARepo.save(plant);
+        } catch (Exception e) {
+            throw new DuplicatedPlantException("Pflanze bereits vorhanden!");
+        }
+
     }
 
     @Override

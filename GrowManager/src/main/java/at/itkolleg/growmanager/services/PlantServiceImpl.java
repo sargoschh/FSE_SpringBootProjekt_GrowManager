@@ -1,6 +1,7 @@
 package at.itkolleg.growmanager.services;
 
 import at.itkolleg.growmanager.domain.Plant;
+import at.itkolleg.growmanager.exceptions.DuplicatedPlantException;
 import at.itkolleg.growmanager.exceptions.PlantNotFound;
 import at.itkolleg.growmanager.repositories.DbAccessPlant;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,12 @@ public class PlantServiceImpl implements PlantService {
     }
 
     @Override
-    public Plant insertPlant(Plant plant) {
+    public Plant insertPlant(Plant plant) throws DuplicatedPlantException {
         return this.dbAccessPlant.savePlant(plant);
     }
 
     @Override
-    public Plant updatePlant(Plant plant) throws PlantNotFound {
+    public Plant updatePlant(Plant plant) throws PlantNotFound, DuplicatedPlantException {
         Plant plantFromDb = this.dbAccessPlant.plantWithId(plant.getId());
         plantFromDb.setName(plant.getName());
         plantFromDb.setType(plant.getType());
