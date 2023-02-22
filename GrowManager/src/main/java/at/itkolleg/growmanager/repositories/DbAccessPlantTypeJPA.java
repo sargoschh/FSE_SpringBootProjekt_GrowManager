@@ -1,6 +1,7 @@
 package at.itkolleg.growmanager.repositories;
 
 import at.itkolleg.growmanager.domain.PlantType;
+import at.itkolleg.growmanager.exceptions.DuplicatedPlantTypeException;
 import at.itkolleg.growmanager.exceptions.PlantTypeNotFound;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,12 @@ public class DbAccessPlantTypeJPA implements DbAccessPlantType {
     }
 
     @Override
-    public PlantType savePlantType(PlantType plantType) {
-        return this.plantTypeJPARepo.save(plantType);
+    public PlantType savePlantType(PlantType plantType) throws DuplicatedPlantTypeException {
+        try {
+            return this.plantTypeJPARepo.save(plantType);
+        } catch (Exception e) {
+            throw new DuplicatedPlantTypeException("Pflanzentyp bereits vorhanden");
+        }
     }
 
     @Override
@@ -42,8 +47,8 @@ public class DbAccessPlantTypeJPA implements DbAccessPlantType {
     }
 
     @Override
-    public PlantType deletePlantTypeWithId(Long id) {
-        PlantType plantTypeFromDb = this.deletePlantTypeWithId(id);
+    public PlantType deletePlantTypeWithId(Long id) throws PlantTypeNotFound {
+        PlantType plantTypeFromDb = this.plantTypesWithId(id);
         this.plantTypeJPARepo.deleteById(plantTypeFromDb.getId());
         return plantTypeFromDb;
     }

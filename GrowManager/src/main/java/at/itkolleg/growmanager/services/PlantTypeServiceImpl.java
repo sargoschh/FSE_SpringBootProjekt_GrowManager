@@ -1,6 +1,7 @@
 package at.itkolleg.growmanager.services;
 
 import at.itkolleg.growmanager.domain.PlantType;
+import at.itkolleg.growmanager.exceptions.DuplicatedPlantTypeException;
 import at.itkolleg.growmanager.exceptions.PlantTypeNotFound;
 import at.itkolleg.growmanager.repositories.DbAccessPlantType;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,12 @@ public class PlantTypeServiceImpl implements PlantTypeService {
     }
 
     @Override
-    public PlantType insertPlantType(PlantType plantType) {
+    public PlantType insertPlantType(PlantType plantType) throws DuplicatedPlantTypeException {
         return this.dbAccessPlantType.savePlantType(plantType);
     }
 
     @Override
-    public PlantType updatePlantType(PlantType plantType) throws PlantTypeNotFound {
+    public PlantType updatePlantType(PlantType plantType) throws PlantTypeNotFound, DuplicatedPlantTypeException {
         PlantType plantTypeFromDb = this.dbAccessPlantType.plantTypesWithId(plantType.getId());
         plantTypeFromDb.setName(plantType.getName());
         return this.dbAccessPlantType.savePlantType(plantTypeFromDb);
