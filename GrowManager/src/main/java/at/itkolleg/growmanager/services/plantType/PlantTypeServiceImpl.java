@@ -1,9 +1,9 @@
-package at.itkolleg.growmanager.services;
+package at.itkolleg.growmanager.services.plantType;
 
 import at.itkolleg.growmanager.domain.PlantType;
-import at.itkolleg.growmanager.exceptions.DuplicatedPlantTypeException;
-import at.itkolleg.growmanager.exceptions.PlantTypeNotFound;
-import at.itkolleg.growmanager.repositories.DbAccessPlantType;
+import at.itkolleg.growmanager.exceptions.plantType.DuplicatedPlantTypeException;
+import at.itkolleg.growmanager.exceptions.plantType.PlantTypeNotFound;
+import at.itkolleg.growmanager.repositories.plantType.DbAccessPlantType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

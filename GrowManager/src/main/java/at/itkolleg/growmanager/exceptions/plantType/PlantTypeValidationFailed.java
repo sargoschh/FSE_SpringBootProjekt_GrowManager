@@ -1,5 +1,6 @@
-package at.itkolleg.growmanager.exceptions;
+package at.itkolleg.growmanager.exceptions.plantType;
 
+import at.itkolleg.growmanager.exceptions.FormValidationExceptionDTO;
 import lombok.Getter;
 import lombok.Setter;
 

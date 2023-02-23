@@ -1,4 +1,4 @@
-package at.itkolleg.growmanager.exceptions;
+package at.itkolleg.growmanager.exceptions.plant;
 
 public class DuplicatedPlantException extends Exception {
     public DuplicatedPlantException(String message) {

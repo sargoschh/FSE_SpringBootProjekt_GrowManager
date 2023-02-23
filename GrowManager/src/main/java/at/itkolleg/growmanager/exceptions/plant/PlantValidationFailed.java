@@ -1,4 +1,6 @@
-package at.itkolleg.growmanager.exceptions;
+package at.itkolleg.growmanager.exceptions.plant;
+
+import at.itkolleg.growmanager.exceptions.FormValidationExceptionDTO;
 
 public class PlantValidationFailed extends Exception {
 

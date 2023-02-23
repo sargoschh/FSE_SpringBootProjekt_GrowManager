@@ -1,10 +1,9 @@
-package at.itkolleg.growmanager.controller;
+package at.itkolleg.growmanager.controller.plantType;
 
 import at.itkolleg.growmanager.domain.PlantType;
-import at.itkolleg.growmanager.exceptions.DuplicatedPlantTypeException;
-import at.itkolleg.growmanager.exceptions.PlantTypeNotFound;
-import at.itkolleg.growmanager.services.PlantTypeService;
-import at.itkolleg.growmanager.services.PlantTypeServiceImpl;
+import at.itkolleg.growmanager.exceptions.plantType.DuplicatedPlantTypeException;
+import at.itkolleg.growmanager.exceptions.plantType.PlantTypeNotFound;
+import at.itkolleg.growmanager.services.plantType.PlantTypeService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,21 +26,21 @@ public class PlantTypeThymeleafController {
     @GetMapping
     public String getAllPlantTypes(Model model) {
         model.addAttribute("allPlantTypes", this.plantTypeService.allPlantTypes());
-        return "allPlantTypes";
+        return "plantType/allPlantTypes";
     }
 
     @GetMapping("/insert")
     public String insertPlantTypeForm(Model model) {
         PlantType plantType = new PlantType();
         model.addAttribute("plantType", plantType);
-        return "insertPlantType";
+        return "plantType/insertPlantType";
     }
 
     @PostMapping("/insert")
     public String insertPlantType(@Valid PlantType plantType, BindingResult bindingResult, Model model) {
         try {
             if(bindingResult.hasErrors()) {
-                return "insertPlantType";
+                return "plantType/insertPlantType";
             } else {
                 this.plantTypeService.insertPlantType(plantType);
                 return "redirect:/growmanager/v1/plantTypes";
@@ -58,7 +57,7 @@ public class PlantTypeThymeleafController {
         try {
             PlantType plantType = this.plantTypeService.plantTypeWithId(id);
             model.addAttribute("plantType", plantType);
-            return "updatePlantType";
+            return "plantType/updatePlantType";
         } catch (PlantTypeNotFound plantTypeNotFound) {
             model.addAttribute("error", plantTypeNotFound.getMessage());
             return "error";
@@ -68,7 +67,7 @@ public class PlantTypeThymeleafController {
     @PostMapping("/update")
     public String updatePlantType(@Valid PlantType plantType, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "updatePlantType";
+            return "plantType/updatePlantType";
         } else {
             try {
                 this.plantTypeService.updatePlantType(plantType);

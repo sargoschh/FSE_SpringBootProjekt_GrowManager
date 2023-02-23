@@ -1,4 +1,4 @@
-package at.itkolleg.growmanager.repositories;
+package at.itkolleg.growmanager.repositories.plant;
 
 import at.itkolleg.growmanager.domain.Plant;
 import org.springframework.data.jpa.repository.JpaRepository;

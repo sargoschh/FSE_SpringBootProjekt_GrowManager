@@ -1,8 +1,8 @@
-package at.itkolleg.growmanager.services;
+package at.itkolleg.growmanager.services.plant;
 
 import at.itkolleg.growmanager.domain.Plant;
-import at.itkolleg.growmanager.exceptions.DuplicatedPlantException;
-import at.itkolleg.growmanager.exceptions.PlantNotFound;
+import at.itkolleg.growmanager.exceptions.plant.DuplicatedPlantException;
+import at.itkolleg.growmanager.exceptions.plant.PlantNotFound;
 
 import java.util.List;
 

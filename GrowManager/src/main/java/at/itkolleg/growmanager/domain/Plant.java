@@ -33,4 +33,10 @@ public class Plant {
     @Min(1)
     @Max(365)
     private Integer growthPeriod;
+
+    public Plant(String name, PlantType type, Integer growthPeriod) {
+        this.name = name;
+        this.type = type;
+        this.growthPeriod = growthPeriod;
+    }
 }

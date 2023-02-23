@@ -1,4 +1,4 @@
-package at.itkolleg.growmanager.exceptions;
+package at.itkolleg.growmanager.exceptions.plant;
 
 public class PlantNotFound extends Exception {
     public PlantNotFound(String message) {
