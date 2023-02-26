@@ -25,11 +25,11 @@
                         <h2>Manage <b>PlantTypes</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <a th:href="@{/growmanager/v1/plantTypes}" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back to PlantTypes</span></a>
+                        <a th:href="@{/growmanager/v1/plants}" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back to Plants</span></a>
                     </div>
                 </div>
             </div>
-            <form th:object="${plantType}" th:action="@{/growmanager/v1/plantTypes/update}" method="POST">
+            <form th:object="${plant}" th:action="@{/growmanager/v1/plants/update}" method="POST">
                 <div class="mb-3">
                     <label for="id" class="form-label">ID</label>
                     <input type="text" class="form-control" id="id" name="id" th:field="*{id}" readonly>
@@ -38,6 +38,18 @@
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
                     <div class="form-text" th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="type" class="form-label">PlantType</label>
+                    <select name="type.id" id="type" class="form-control">
+                        <option th:each="plantType : ${plantTypes}" th:value="${plantType.getId()}" th:text="${plantType.name}" th:field="*{type}"></option>
+                    </select>
+                    <!--<div class="form-text" th:if="${#fields.hasErrors('type')}" th:errorclass="error" th:errors="*{type}"></div>-->
+                </div>
+                <div class="mb-3">
+                    <label for="growthPeriod" class="form-label">Wachstumsdauer (in Tagen)</label>
+                    <input type="text" class="form-control" id="growthPeriod" name="growthPeriod" th:field="*{growthPeriod}">
+                    <div class="form-text" th:if="${#fields.hasErrors('growthPeriod')}" th:errorclass="error" th:errors="*{growthPeriod}"></div>
                 </div>
 
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Aktualisieren</button>

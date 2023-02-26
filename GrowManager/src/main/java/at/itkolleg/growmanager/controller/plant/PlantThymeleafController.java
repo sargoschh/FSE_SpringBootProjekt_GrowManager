@@ -3,6 +3,7 @@ package at.itkolleg.growmanager.controller.plant;
 import at.itkolleg.growmanager.domain.Plant;
 import at.itkolleg.growmanager.domain.PlantType;
 import at.itkolleg.growmanager.exceptions.plant.DuplicatedPlantException;
+import at.itkolleg.growmanager.exceptions.plant.PlantNotFound;
 import at.itkolleg.growmanager.exceptions.plantType.PlantTypeNotFound;
 import at.itkolleg.growmanager.services.plant.PlantService;
 import at.itkolleg.growmanager.services.plantType.PlantTypeService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,21 +46,6 @@ public class PlantThymeleafController {
         return "plant/insertPlant";
     }
 
-    /*@PostMapping("/insert")
-    public String insertPlant(String name, String plantTypeId, String growthPeriod, Model model) {
-        try {
-            Plant plant = new Plant(name, this.plantTypeService.plantTypeWithId(Long.parseLong(plantTypeId)), Integer.parseInt(growthPeriod));
-            this.plantService.insertPlant(plant);
-            return "redirect:/growmanager/v1/plants";
-        } catch (DuplicatedPlantException e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        } catch (PlantTypeNotFound e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
-    }*/
-
     @PostMapping("/insert")
     public String insertPlant(@Valid Plant plant, BindingResult bindingResult, Model model) {
         try {
@@ -71,6 +58,45 @@ public class PlantThymeleafController {
             }
         } catch (DuplicatedPlantException e) {
             model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping("/update/{id}")
+    public String updatePlantForm(@PathVariable Long id, Model model) {
+        try {
+            Plant plant = this.plantService.plantWithId(id);
+            model.addAttribute("plant", plant);
+            List<PlantType> plantTypes = this.plantTypeService.allPlantTypes();
+            model.addAttribute("plantTypes", plantTypes);
+            return "plant/updatePlant";
+        } catch (PlantNotFound plantNotFound) {
+            model.addAttribute("error", plantNotFound.getMessage());
+            return "error";
+        }
+    }
+
+    @PostMapping("/update")
+    public String updatePlant(@Valid Plant plant, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "plant/updatePlant";
+        } else {
+            try {
+                this.plantService.updatePlant(plant);
+                return "redirect:/growmanager/v1/plants";
+            } catch (Exception e) {
+                return "redirect:/growmanager/v1/plants";
+            }
+        }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deletePlant(@PathVariable Long id, Model model) {
+        try {
+            this.plantService.deletePlantWithId(id);
+            return "redirect:/growmanager/v1/plants";
+        } catch (PlantNotFound plantNotFound) {
+            model.addAttribute("error", plantNotFound.getMessage());
             return "error";
         }
     }
