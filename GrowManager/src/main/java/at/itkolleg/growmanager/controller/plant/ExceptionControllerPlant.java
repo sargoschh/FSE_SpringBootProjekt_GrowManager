@@ -23,6 +23,7 @@ public class ExceptionControllerPlant {
         return new ResponseEntity<>(plantValidationFailed.getErrorMap(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DuplicatedPlantException.class)
     public ResponseEntity<ExceptionsDTO> duplicatedPlantException(DuplicatedPlantException duplicatedPlantException) {
         return new ResponseEntity<>(new ExceptionsDTO("1500", duplicatedPlantException.getMessage()), HttpStatus.CONFLICT);
     }

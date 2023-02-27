@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Insert Plant</title>
+  <title>Insert Grow</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,31 +22,31 @@
       <div class="table-title">
         <div style="width:100%" class="row">
           <div class="col-sm-6">
-            <h2>Manage <b>Plant</b></h2>
+            <h2>Manage <b>Grows</b></h2>
           </div>
           <div class="col-sm-6">
-            <a th:href="@{/growmanager/v1/plants}" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back to Plants</span></a>
+            <a th:href="@{/growmanager/v1/grows}" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back to Grows</span></a>
           </div>
         </div>
       </div>
-      <form th:object="${plant}" th:action="@{/growmanager/v1/plants/insert}" method="POST">
+      <form th:object="${grow}" th:action="@{/growmanager/v1/grows/insert}" method="POST">
         <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" name="name">
-          <!--<div class="form-text" th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></div>-->
-        </div>
-        <div class="mb-3">
-          <label for="type" class="form-label">PlantType</label>
-          <select name="type.id" id="type" class="form-control">
+          <label for="plant" class="form-label">Plant</label>
+          <select name="plant.id" id="plant" class="form-control">
             <option>---Bitte Auswählen---</option>
-            <option th:each="plantType : ${plantTypes}" th:value="${plantType.getId()}" th:text="${plantType.name}"></option>
+            <option th:each="plant : ${plants}" th:value="${plant.getId()}" th:text="${plant.name}"></option>
           </select>
           <!--<div class="form-text" th:if="${#fields.hasErrors('type')}" th:errorclass="error" th:errors="*{type}"></div>-->
         </div>
         <div class="mb-3">
-          <label for="growthPeriod" class="form-label">Wachstumsdauer (in Tagen)</label>
-          <input type="text" class="form-control" id="growthPeriod" name="growthPeriod">
-          <div class="form-text" th:if="${#fields.hasErrors('growthPeriod')}" th:errorclass="error" th:errors="*{growthPeriod}"></div>
+          <label for="startDate" class="form-label">StartDatum</label>
+          <input type="date" class="form-control" id="startDate" name="startDate">
+          <div class="form-text" th:if="${#fields.hasErrors('startDate')}" th:errorclass="error" th:errors="*{startDate}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="potSize" class="form-label">Topfgröße</label>
+          <input type="number" class="form-control" id="potSize" name="potSize">
+          <div class="form-text" th:if="${#fields.hasErrors('potSize')}" th:errorclass="error" th:errors="*{potSize}"></div>
         </div>
 
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Speichern</button>
