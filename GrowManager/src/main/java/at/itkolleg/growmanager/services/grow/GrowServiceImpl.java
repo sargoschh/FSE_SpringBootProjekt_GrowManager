@@ -32,6 +32,8 @@ public class GrowServiceImpl implements GrowService {
     public Grow updateGrow(Grow grow) throws GrowNotFound, DuplicatedGrowException {
         Grow growFromDb = this.dbAccessGrow.growWithId(grow.getId());
         growFromDb.setStartDate(grow.getStartDate());
+        growFromDb.setEstimatedEndDate(grow.getEstimatedEndDate());
+        growFromDb.setPotSize(grow.getPotSize());
         growFromDb.setHarvested(grow.getHarvested());
         growFromDb.setActualEndDate(grow.getActualEndDate());
         return this.dbAccessGrow.saveGrow(growFromDb);

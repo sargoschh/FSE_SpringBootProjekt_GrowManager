@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Grow</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/styles.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div style="width:100%" class="row">
+          <div class="col-sm-6">
+            <h2>Manage <b>Grows</b></h2>
+          </div>
+          <div class="col-sm-6">
+            <a th:href="@{/growmanager/v1/grows}" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back to Grows</span></a>
+          </div>
+        </div>
+      </div>
+      <form th:object="${grow}" th:action="@{/growmanager/v1/grows/update}" method="POST">
+        <div class="mb-3">
+          <label for="id" class="form-label">ID</label>
+          <input type="text" class="form-control" id="id" name="id" th:field="*{id}" readonly>
+        </div>
+        <div class="mb-3">
+          <label for="plant" class="form-label">Plant</label>
+          <select name="plant.id" id="plant" class="form-control" readonly>            <option>---Bitte Auswählen---</option>
+            <option th:each="plant : ${plants}" th:value="${plant.getId()}" th:text="${plant.name}" th:field="*{plant}"></option>
+          </select>
+          <!--<div class="form-text" th:if="${#fields.hasErrors('type')}" th:errorclass="error" th:errors="*{type}"></div>-->
+        </div>
+        <div class="mb-3">
+          <label for="startDate" class="form-label">StartDatum</label>
+          <input type="date" class="form-control" id="startDate" name="startDate" th:field="*{startDate}">
+          <div class="form-text" th:if="${#fields.hasErrors('startDate')}" th:errorclass="error" th:errors="*{startDate}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="potSize" class="form-label">Topfgröße</label>
+          <input type="number" class="form-control" id="potSize" name="potSize" th:field="*{potSize}">
+          <div class="form-text" th:if="${#fields.hasErrors('potSize')}" th:errorclass="error" th:errors="*{potSize}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="harvested" class="form-label">Geerntet?</label>
+          <select name="harvested" id="harvested" class="form-control">
+            <!--<option th:value="${plantType.getId()}" th:text="${plantType.name}" th:field="*{harvested}"></option>-->
+            <option>--- Bitte auswählen ---</option>
+            <option th:value="true">Ja, Grow bereits geerntet!</option>
+            <option th:value="false">Nein, Grow noch nicht geerntet!</option>
+          </select>
+          <div class="form-text" th:if="${#fields.hasErrors('potSize')}" th:errorclass="error" th:errors="*{potSize}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="actualEndDate" class="form-label">Tatsächliches Enddatum</label>
+          <input type="date" class="form-control" id="actualEndDate" name="actualEndDate" th:field="*{actualEndDate}">
+          <div class="form-text" th:if="${#fields.hasErrors('actualEndDate')}" th:errorclass="error" th:errors="*{actualEndDate}"></div>
+        </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Speichern</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -56,12 +56,11 @@ public class GrowManagerApplication implements ApplicationRunner {
 
         LocalDate startDate = LocalDate.of(2023, 02, 01);
         LocalDate estimatedEndDate = startDate.plusDays(30);
-        LocalDate actualEnddate = startDate.plusDays(60);
 
-        Grow growTomate = new Grow(tomate, startDate, estimatedEndDate, 5.5F, false, actualEnddate);
-        Grow growErdbeere = new Grow(erdbeere, startDate, estimatedEndDate, 3.5F, false, actualEnddate);
-        Grow growBasilikum = new Grow(basilikum, startDate, estimatedEndDate, 8.5F, false, actualEnddate);
-        Grow growFliegenpilz = new Grow(fliegenpilz, startDate, estimatedEndDate, 1.5F, false, actualEnddate);
+        Grow growTomate = new Grow(tomate, startDate, estimatedEndDate, 5.5F, false, null);
+        Grow growErdbeere = new Grow(erdbeere, startDate, estimatedEndDate, 3.5F, false, null);
+        Grow growBasilikum = new Grow(basilikum, startDate, estimatedEndDate, 8.5F, false, null);
+        Grow growFliegenpilz = new Grow(fliegenpilz, startDate, estimatedEndDate, 1.5F, false, null);
 
         this.dbAccessGrow.saveGrow(growTomate);
         this.dbAccessGrow.saveGrow(growErdbeere);
