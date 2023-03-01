@@ -21,6 +21,7 @@ public class Repot {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "grow_id")
     private Grow grow;
 
     private Float potSize;
