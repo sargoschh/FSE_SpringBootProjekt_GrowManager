@@ -13,6 +13,6 @@ public interface RepotService {
     Repot insertRepot(Repot repot) throws DuplicatedRepotException;
     Repot updateRepot(Repot repot) throws RepotNotFound, DuplicatedRepotException;
     Repot repotWithId(Long id) throws RepotNotFound;
-    List<Repot> allRepotsWithPlants(Grow grow);
+    List<Repot> allRepotsWithGrows(Grow grow);
     Repot deleteRepotWithId(Long id) throws RepotNotFound;
 }

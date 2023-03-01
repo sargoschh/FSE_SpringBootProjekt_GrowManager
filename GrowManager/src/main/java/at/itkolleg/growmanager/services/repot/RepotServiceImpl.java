@@ -20,31 +20,35 @@ public class RepotServiceImpl implements RepotService {
 
     @Override
     public List<Repot> allRepots() {
-        return null;
+        return this.dbAccessRepot.allRepots();
     }
 
     @Override
     public Repot insertRepot(Repot repot) throws DuplicatedRepotException {
-        return null;
+        return this.dbAccessRepot.saveRepot(repot);
     }
 
     @Override
     public Repot updateRepot(Repot repot) throws RepotNotFound, DuplicatedRepotException {
-        return null;
+        Repot repotFromDb = this.dbAccessRepot.repotWithId(repot.getId());
+        repotFromDb.setPotSize(repot.getPotSize());
+        repotFromDb.setDate(repot.getDate());
+        repotFromDb.setComment(repot.getComment());
+        return this.dbAccessRepot.saveRepot(repotFromDb);
     }
 
     @Override
     public Repot repotWithId(Long id) throws RepotNotFound {
-        return null;
+        return this.dbAccessRepot.repotWithId(id);
     }
 
     @Override
-    public List<Repot> allRepotsWithPlants(Grow grow) {
-        return null;
+    public List<Repot> allRepotsWithGrows(Grow grow) {
+        return this.dbAccessRepot.allRepotsWithGrow(grow);
     }
 
     @Override
     public Repot deleteRepotWithId(Long id) throws RepotNotFound {
-        return null;
+        return this.dbAccessRepot.deleteRepotTypeWithId(id);
     }
 }
