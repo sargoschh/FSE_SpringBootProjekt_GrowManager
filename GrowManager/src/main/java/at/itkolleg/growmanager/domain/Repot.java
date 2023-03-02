@@ -30,4 +30,11 @@ public class Repot {
     private LocalDate date;
 
     private String comment;
+
+    public Repot(Grow grow, Float potSize, LocalDate date, String comment) {
+        this.grow = grow;
+        this.potSize = potSize;
+        this.date = date;
+        this.comment = comment;
+    }
 }

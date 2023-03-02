@@ -3,9 +3,11 @@ package at.itkolleg.growmanager;
 import at.itkolleg.growmanager.domain.Grow;
 import at.itkolleg.growmanager.domain.Plant;
 import at.itkolleg.growmanager.domain.PlantType;
+import at.itkolleg.growmanager.domain.Repot;
 import at.itkolleg.growmanager.repositories.grow.DbAccessGrow;
 import at.itkolleg.growmanager.repositories.plant.DbAccessPlant;
 import at.itkolleg.growmanager.repositories.plantType.DbAccessPlantType;
+import at.itkolleg.growmanager.repositories.repot.DbAccessRepot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -26,6 +28,9 @@ public class GrowManagerApplication implements ApplicationRunner {
 
     @Autowired
     DbAccessGrow dbAccessGrow;
+
+    @Autowired
+    DbAccessRepot dbAccessRepot;
 
     public static void main(String[] args) {
         SpringApplication.run(GrowManagerApplication.class, args);
@@ -66,6 +71,16 @@ public class GrowManagerApplication implements ApplicationRunner {
         this.dbAccessGrow.saveGrow(growErdbeere);
         this.dbAccessGrow.saveGrow(growBasilikum);
         this.dbAccessGrow.saveGrow(growFliegenpilz);
+
+        Repot repotTomate = new Repot(growTomate, 7.8F, LocalDate.of(2023, 03,02), "Repot von 1,5 auf 8,5l");
+        Repot repotErdbeere = new Repot(growErdbeere, 9.5F, LocalDate.of(2023, 03,05), "Super Repot");
+        Repot repotBasilikum = new Repot(growBasilikum, 4.6F, LocalDate.of(2023, 03,9), "Alle umgetopft!");
+        Repot repotFliegenpilz = new Repot(growFliegenpilz, 15.2F, LocalDate.of(2023, 03,3), "Wahnsinn");
+
+        this.dbAccessRepot.saveRepot(repotTomate);
+        this.dbAccessRepot.saveRepot(repotErdbeere);
+        this.dbAccessRepot.saveRepot(repotBasilikum);
+        this.dbAccessRepot.saveRepot(repotFliegenpilz);
 
     }
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Grows</title>
+    <title>Repots</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,11 +22,11 @@
             <div class="table-title">
                 <div style="width:100%" class="row">
                     <div class="col-sm-5">
-                        <h2>Manage <b>Grows</b></h2>
+                        <h2>Manage <b>Repots</b></h2>
                     </div>
                     <div class="col-sm-7">
                         <a th:href="@{/growmanager/v1}" class="btn btn-success"><i class="material-icons">&#xe314;</i> <span>Back to Menu</span></a>
-                        <a th:href="@{/growmanager/v1/grows/insert}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Grow</span></a>
+                        <a th:href="@{/growmanager/v1/repots/insert}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Repot</span></a>
                     </div>
                 </div>
             </div>
@@ -34,29 +34,23 @@
                 <thead>
                 <tr>
                     <th style="width:10%">ID</th>
-                    <th style="width:30%">Pflanzenname</th>
-                    <th style="width:10%">Startdatum</th>
-                    <th style="width:10%">Erwartetes Ende</th>
+                    <th style="width:30%">Grow</th>
                     <th style="width:10%">Topfgröße</th>
-                    <th style="width:10%">Tatsächliches Ende</th>
+                    <th style="width:10%">Datum</th>
+                    <th style="width:20%">Kommentar</th>
                     <th style="width:20%">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="grow: ${allGrows}">
-                    <td style="width:10%" th:text="${grow.id}"></td>
-                    <td style="width:30%" th:text="${grow.getPlant().getName()}"></td>
-                    <td style="width:10%" th:text="${grow.startDate}"></td>
-                    <td style="width:10%" th:text="${grow.estimatedEndDate}"></td>
-                    <td style="width:10%" th:text="${grow.potSize}"></td>
-                    <td style="width:10%" th:text="${grow.actualEndDate}"></td>
+                <tr th:each="repot: ${allRepots}">
+                    <td style="width:10%" th:text="${repot.id}"></td>
+                    <td style="width:30%" th:text="${repot.getGrow().getPlant().getName()}"></td>
+                    <td style="width:10%" th:text="${repot.potSize}"></td>
+                    <td style="width:10%" th:text="${repot.date}"></td>
+                    <td style="width:20%" th:text="${repot.comment}"></td>
                     <td style="width:20%">
-                        <a th:href="@{/growmanager/v1/grows/update/{id}(id=${grow.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a th:href="@{/growmanager/v1/grows/delete/{id}(id=${grow.id})}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                    <td style="width:20%">
-                        <a th:href="@{/growmanager/v1/repots/{id}(id=${grow.id})}" class="repot"><i class="material-icons repot" style="color: #0a8d0b" data-toggle="tooltip" title="Repot">&#xea35;</i></a>
-                        <a th:href="@{/growmanager/v1/waters/{id}(id=${grow.id})}" class="water"><i class="material-icons water" style="color: #1031d3" data-toggle="tooltip" title="Water">&#xe810;</i></a>
+                        <a th:href="@{/growmanager/v1/repots/update/{id}(id=${repot.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a th:href="@{/growmanager/v1/repots/delete/{id}(id=${repot.id})}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>
 

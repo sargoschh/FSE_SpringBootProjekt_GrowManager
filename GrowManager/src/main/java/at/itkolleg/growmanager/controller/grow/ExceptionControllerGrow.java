@@ -24,7 +24,7 @@ public class ExceptionControllerGrow {
     }
 
     @ExceptionHandler(DuplicatedGrowException.class)
-    public ResponseEntity<ExceptionsDTO> duplicatedPlantException(DuplicatedGrowException duplicatedGrowException) {
+    public ResponseEntity<ExceptionsDTO> duplicatedGrowException(DuplicatedGrowException duplicatedGrowException) {
         return new ResponseEntity<>(new ExceptionsDTO("1500", duplicatedGrowException.getMessage()), HttpStatus.CONFLICT);
     }
 }
