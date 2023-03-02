@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Insert Repot</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/styles.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div style="width:100%" class="row">
+          <div class="col-sm-6">
+            <h2>Manage <b>Repots</b></h2>
+          </div>
+          <div class="col-sm-6">
+            <a href="javascript:history.back()" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back</span></a>
+          </div>
+        </div>
+      </div>
+      <form th:object="${repot}" th:action="@{/growmanager/v1/repots/insert}" method="POST">
+        <div class="mb-3">
+          <label for="grow" class="form-label">Plant</label>
+          <select name="grow.id" id="grow" class="form-control">
+            <option th:if="${repot.grow} != null" th:value="${repot.grow.id}" th:text="${repot.grow.plant.name}" th:field="${repot.grow.plant.name}"></option>
+            <option th:unless="${repot.grow} != null">---Bitte Auswählen---</option>
+            <option th:unless="${repot.grow} != null" th:each="grow : ${allGrows}" th:value="${grow.getId()}" th:text="${grow.getPlant().getName()}"></option>
+          </select>
+          <!--<div class="form-text" th:if="${#fields.hasErrors('type')}" th:errorclass="error" th:errors="*{type}"></div>-->
+        </div>
+        <div class="mb-3">
+          <label for="potSize" class="form-label">Topfgröße</label>
+          <input type="number" step="0.1" class="form-control" id="potSize" name="potSize">
+          <div class="form-text" th:if="${#fields.hasErrors('potSize')}" th:errorclass="error" th:errors="*{potSize}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Datum</label>
+          <input type="date" class="form-control" id="date" name="date">
+          <div class="form-text" th:if="${#fields.hasErrors('date')}" th:errorclass="error" th:errors="*{date}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="comment" class="form-label">Kommentar</label>
+          <input type="text" class="form-control" id="comment" name="comment">
+          <div class="form-text" th:if="${#fields.hasErrors('comment')}" th:errorclass="error" th:errors="*{comment}"></div>
+        </div>
+
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Speichern</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

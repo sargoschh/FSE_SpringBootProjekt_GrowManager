@@ -91,10 +91,10 @@ public class GrowThymeleafController {
                 if(grow.getActualEndDate() == null && grow.getHarvested()) {
                     grow.setActualEndDate(LocalDate.now());
                 }
-                this.growService.insertGrow(grow);
+                this.growService.updateGrow(grow);
                 return "redirect:/growmanager/v1/grows";
             }
-        } catch (PlantNotFound | DuplicatedGrowException e) {
+        } catch (PlantNotFound | DuplicatedGrowException | GrowNotFound e) {
             model.addAttribute("error", e.getMessage());
             return "error";
         }
