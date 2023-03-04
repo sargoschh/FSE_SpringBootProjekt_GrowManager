@@ -1,7 +1,6 @@
 package at.itkolleg.growmanager.exceptions.fertilizerType;
 
 import at.itkolleg.growmanager.exceptions.FormValidationExceptionDTO;
-import at.itkolleg.growmanager.exceptions.fertilizer.FertilizerValidationFailed;
 
 public class FertilizerTypeValidationFailed extends Exception{
 
