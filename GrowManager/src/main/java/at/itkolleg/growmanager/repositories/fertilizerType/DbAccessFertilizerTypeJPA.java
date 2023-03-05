@@ -51,7 +51,7 @@ public class DbAccessFertilizerTypeJPA implements DbAccessFertilizerType{
     }
 
     @Override
-    public FertilizerType deleteFertilizerTypeWithId(Long id) throws FertilizerTypeNotFound, FertilizerNotFound {
+    public FertilizerType deleteFertilizerTypeWithId(Long id) throws FertilizerTypeNotFound {
         FertilizerType fertilizerTypeFromDb = this.fertilizerTypesWithId(id);
         this.fertilizerTypeJPARepo.deleteById(fertilizerTypeFromDb.getId());
         return fertilizerTypeFromDb;
