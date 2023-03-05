@@ -1,9 +1,8 @@
 package at.itkolleg.growmanager;
 
-import at.itkolleg.growmanager.domain.Grow;
-import at.itkolleg.growmanager.domain.Plant;
-import at.itkolleg.growmanager.domain.PlantType;
-import at.itkolleg.growmanager.domain.Repot;
+import at.itkolleg.growmanager.domain.*;
+import at.itkolleg.growmanager.repositories.fertilizer.DbAccessFertilizer;
+import at.itkolleg.growmanager.repositories.fertilizerType.DbAccessFertilizerType;
 import at.itkolleg.growmanager.repositories.grow.DbAccessGrow;
 import at.itkolleg.growmanager.repositories.plant.DbAccessPlant;
 import at.itkolleg.growmanager.repositories.plantType.DbAccessPlantType;
@@ -31,6 +30,13 @@ public class GrowManagerApplication implements ApplicationRunner {
 
     @Autowired
     DbAccessRepot dbAccessRepot;
+
+    @Autowired
+    DbAccessFertilizerType dbAccessFertilizerType;
+
+    @Autowired
+    DbAccessFertilizer dbAccessFertilizer;
+
 
     public static void main(String[] args) {
         SpringApplication.run(GrowManagerApplication.class, args);
@@ -81,6 +87,31 @@ public class GrowManagerApplication implements ApplicationRunner {
         this.dbAccessRepot.saveRepot(repotErdbeere);
         this.dbAccessRepot.saveRepot(repotBasilikum);
         this.dbAccessRepot.saveRepot(repotFliegenpilz);
+
+        FertilizerType natural = new FertilizerType("NATURAL");
+        FertilizerType terra = new FertilizerType("TERRA");
+        FertilizerType coco = new FertilizerType("COCO");
+        FertilizerType hydro = new FertilizerType("HYDRO");
+        FertilizerType universal = new FertilizerType("UNIVERSAL");
+
+        this.dbAccessFertilizerType.saveFertilizerType(natural);
+        this.dbAccessFertilizerType.saveFertilizerType(terra);
+        this.dbAccessFertilizerType.saveFertilizerType(coco);
+        this.dbAccessFertilizerType.saveFertilizerType(hydro);
+        this.dbAccessFertilizerType.saveFertilizerType(universal);
+
+        Fertilizer greenSensation = new Fertilizer("Green Sensation", universal, 100F);
+        Fertilizer pureZym = new Fertilizer("Pure Zym", universal, 100F);
+        Fertilizer terraGrow = new Fertilizer("Terra Grow", terra, 100F);
+        Fertilizer terraBloom = new Fertilizer("Terra Bloom", terra, 1000F);
+
+
+        this.dbAccessFertilizer.saveFertilizer(greenSensation);
+        this.dbAccessFertilizer.saveFertilizer(pureZym);
+        this.dbAccessFertilizer.saveFertilizer(terraGrow);
+        this.dbAccessFertilizer.saveFertilizer(terraBloom);
+
+
 
     }
 
