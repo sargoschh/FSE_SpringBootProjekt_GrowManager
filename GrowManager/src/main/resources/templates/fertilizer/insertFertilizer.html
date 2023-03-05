@@ -33,7 +33,7 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" name="name">
-                    <!--<div class="form-text" th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></div>-->
+                    <div class="form-text" th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="type" class="form-label">FertilizerType</label>
@@ -44,7 +44,7 @@
                     <!--<div class="form-text" th:if="${#fields.hasErrors('type')}" th:errorclass="error" th:errors="*{type}"></div>-->
                 </div>
                 <div class="mb-3">
-                    <label for="dosage" class="form-label">Dosierung (in ??)</label>
+                    <label for="dosage" class="form-label">Dosierung (in ml)</label>
                     <input type="text" class="form-control" id="dosage" name="dosage">
                     <div class="form-text" th:if="${#fields.hasErrors('dosage')}" th:errorclass="error" th:errors="*{dosage}"></div>
                 </div>

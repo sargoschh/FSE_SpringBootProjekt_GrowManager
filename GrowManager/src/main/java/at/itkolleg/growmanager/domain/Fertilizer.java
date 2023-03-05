@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Fertilizer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(unique = true)

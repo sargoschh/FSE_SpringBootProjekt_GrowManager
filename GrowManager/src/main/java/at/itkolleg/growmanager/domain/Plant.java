@@ -1,14 +1,12 @@
 package at.itkolleg.growmanager.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 @AllArgsConstructor
@@ -32,6 +30,7 @@ public class Plant {
 
     @Min(1)
     @Max(365)
+    //@Pattern(regexp="^(0|[1-9][0-9]*)$", message = "Bitte nur numerische Werte eingeben!")
     private Integer growthPeriod;
 
     public Plant(String name, PlantType type, Integer growthPeriod) {

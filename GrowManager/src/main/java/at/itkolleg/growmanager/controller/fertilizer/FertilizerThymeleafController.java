@@ -87,10 +87,10 @@ public class FertilizerThymeleafController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteFertilizer(Long id, Model model){
+    public String deleteFertilizer(@PathVariable Long id, Model model){
         try{
             this.fertilizerService.deleteFertilizerWithid(id);
-            return "redirect:/growmanger/v1/fertilizers";
+            return "redirect:/growmanager/v1/fertilizers";
         }catch(FertilizerNotFound e){
             model.addAttribute("error", e.getMessage());
             return "error";
