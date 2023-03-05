@@ -12,7 +12,7 @@ public interface FertilizerTypeService {
 
     List<FertilizerType> allFertilizerTypes();
 
-    FertilizerType insertFertilizerType(FertilizerType fertilizerType) throws DuplicatedFertilizerException, DuplicatedFertilizerTypeException;
+    FertilizerType insertFertilizerType(FertilizerType fertilizerType) throws DuplicatedFertilizerTypeException;
 
     FertilizerType updateFertilizerType(FertilizerType fertilizerType) throws FertilizerTypeNotFound, DuplicatedFertilizerTypeException;
 
