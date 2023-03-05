@@ -18,12 +18,12 @@ public class ExceptionControllerFertilizer {
         return new ResponseEntity<>(new ExceptionsDTO("1000", fertilizerNotFound.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(FertilizerNotFound.class)
+    @ExceptionHandler(FertilizerValidationFailed.class)
     public ResponseEntity<FormValidationExceptionDTO> fertilizerValidationFailed(FertilizerValidationFailed fertilizerValidationFailed){
         return new ResponseEntity<>(fertilizerValidationFailed.getErrorMap(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(FertilizerNotFound.class)
+    @ExceptionHandler(DuplicatedFertilizerException.class)
     public ResponseEntity<ExceptionsDTO> duplicatedFertilizer(DuplicatedFertilizerException duplicatedFertilizerException){
         return new ResponseEntity<>(new ExceptionsDTO("1500", duplicatedFertilizerException.getMessage()), HttpStatus.CONFLICT);
     }

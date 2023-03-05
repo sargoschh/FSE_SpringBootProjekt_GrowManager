@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/growmanger/v1/fertilizers")
+@RequestMapping("/growmanager/v1/fertilizers")
 public class FertilizerThymeleafController {
 
     private FertilizerService fertilizerService;
@@ -47,11 +47,11 @@ public class FertilizerThymeleafController {
     public String insertFertilizer(@Valid Fertilizer fertilizer, BindingResult bindingResult, Model model){
         try{
             if(bindingResult.hasErrors()){
-                return "fertilizer/allFertilizers";
+                return "fertilizer/insertFertilizer";
             }else{
                 this.fertilizerService.insertFertilizer(fertilizer);
+                return "redirect:/growmanager/v1/fertilizers";
             }
-            return "redirect:/growmanager/v1/fertilizers";
         }catch(DuplicatedFertilizerException e){
             model.addAttribute("error", e.getMessage());
             return "error";
@@ -62,6 +62,7 @@ public class FertilizerThymeleafController {
     public String updateFertilizerForm(@PathVariable Long id, Model model){
         try {
             Fertilizer fertilizer = this.fertilizerService.fertilizerWithId(id);
+            model.addAttribute("fertilizer", fertilizer);
             List<FertilizerType> fertilizerTypes = this.fertilizerTypeService.allFertilizerTypes();
             model.addAttribute("fertilizerTypes", fertilizerTypes);
             return "fertilizer/updateFertilizer";
