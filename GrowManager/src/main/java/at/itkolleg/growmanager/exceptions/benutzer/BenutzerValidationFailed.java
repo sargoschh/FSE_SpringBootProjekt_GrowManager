@@ -1,16 +1,16 @@
-package at.itkolleg.growmanager.exceptions.user;
+package at.itkolleg.growmanager.exceptions.benutzer;
 
 import at.itkolleg.growmanager.exceptions.FormValidationExceptionDTO;
 
-public class UserValidationFailed extends Exception {
+public class BenutzerValidationFailed extends Exception {
 
     private FormValidationExceptionDTO errors;
 
-    public UserValidationFailed(String message){
+    public BenutzerValidationFailed(String message){
         super(message);
     }
 
-    public UserValidationFailed(FormValidationExceptionDTO errors){
+    public BenutzerValidationFailed(FormValidationExceptionDTO errors){
         this.errors = errors;
     }
 

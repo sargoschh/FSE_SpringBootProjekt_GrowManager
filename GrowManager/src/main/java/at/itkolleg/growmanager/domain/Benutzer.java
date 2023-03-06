@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public class Benutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -34,7 +34,7 @@ public class User {
     @Size(min = 2, max = 255, message = "Das Passwort '${validatedValue}' ist ungültig. Passwörter müssen zwischen {min} und {max} Zeichen lang sein.")
     private String password;
 
-    public User(String name, String username, String password) {
+    public Benutzer(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;

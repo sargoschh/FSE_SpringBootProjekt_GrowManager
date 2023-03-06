@@ -7,14 +7,13 @@ import at.itkolleg.growmanager.repositories.grow.DbAccessGrow;
 import at.itkolleg.growmanager.repositories.plant.DbAccessPlant;
 import at.itkolleg.growmanager.repositories.plantType.DbAccessPlantType;
 import at.itkolleg.growmanager.repositories.repot.DbAccessRepot;
-import at.itkolleg.growmanager.repositories.user.DbAccessUser;
+import at.itkolleg.growmanager.repositories.benutzer.DbAccessBenutzer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @SpringBootApplication
@@ -39,7 +38,7 @@ public class GrowManagerApplication implements ApplicationRunner {
     DbAccessFertilizer dbAccessFertilizer;
 
     @Autowired
-    DbAccessUser dbAccessUser;
+    DbAccessBenutzer dbAccessUser;
 
 
     public static void main(String[] args) {
@@ -116,9 +115,15 @@ public class GrowManagerApplication implements ApplicationRunner {
         this.dbAccessFertilizer.saveFertilizer(terraBloom);
 
 
-        User userSarah = new User("Sarah", "sarah", "schnaggl123");
+        Benutzer userSarah = new Benutzer("Sarah", "sarah", "schnaggl123");
+        Benutzer userMarcel = new Benutzer("Marcel", "marcel", "schnaggl123");
+        Benutzer userRomana = new Benutzer("Romana", "romana", "schnaggl123");
+        Benutzer userAdrian = new Benutzer("Adrian", "adrian", "schnaggl123");
 
-        this.dbAccessUser.saveUser(userSarah);
+        this.dbAccessUser.saveBenutzer(userSarah);
+        this.dbAccessUser.saveBenutzer(userMarcel);
+        this.dbAccessUser.saveBenutzer(userRomana);
+        this.dbAccessUser.saveBenutzer(userAdrian);
     }
 
 }
