@@ -32,8 +32,8 @@ public class DbAccessUserJPA implements DbAccessUser {
     }
 
     @Override
-    public List<User> allUsersWithName(String name) {
-        return this.userJPARepo.findAllByName(name);
+    public List<User> allUsersWithUsername(String name) {
+        return this.userJPARepo.findAllByUsername(name);
     }
 
     @Override
@@ -51,5 +51,18 @@ public class DbAccessUserJPA implements DbAccessUser {
         User userFromDb = this.userWithId(id);
         this.userJPARepo.deleteById(userFromDb.getId());
         return userFromDb;
+    }
+
+    @Override
+    public Optional<User> findUserByUsernameAndPassword(String username, String password) throws UserNotFound {
+        List<User> allUserWithUsername = this.userJPARepo.findAllByUsername(username);
+        for (User u : allUserWithUsername) {
+            if(u.getPassword().equals(password)) {
+                return Optional.of(u);
+            } else {
+                return Optional.empty();
+            }
+        }
+        return Optional.empty();
     }
 }

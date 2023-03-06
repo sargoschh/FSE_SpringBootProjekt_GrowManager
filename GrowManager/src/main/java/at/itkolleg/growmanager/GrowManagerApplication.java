@@ -7,6 +7,7 @@ import at.itkolleg.growmanager.repositories.grow.DbAccessGrow;
 import at.itkolleg.growmanager.repositories.plant.DbAccessPlant;
 import at.itkolleg.growmanager.repositories.plantType.DbAccessPlantType;
 import at.itkolleg.growmanager.repositories.repot.DbAccessRepot;
+import at.itkolleg.growmanager.repositories.user.DbAccessUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -36,6 +37,9 @@ public class GrowManagerApplication implements ApplicationRunner {
 
     @Autowired
     DbAccessFertilizer dbAccessFertilizer;
+
+    @Autowired
+    DbAccessUser dbAccessUser;
 
 
     public static void main(String[] args) {
@@ -112,7 +116,9 @@ public class GrowManagerApplication implements ApplicationRunner {
         this.dbAccessFertilizer.saveFertilizer(terraBloom);
 
 
+        User userSarah = new User("Sarah", "sarah", "schnaggl123");
 
+        this.dbAccessUser.saveUser(userSarah);
     }
 
 }

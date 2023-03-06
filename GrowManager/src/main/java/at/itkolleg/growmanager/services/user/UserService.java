@@ -14,4 +14,5 @@ public interface UserService {
     User userWithId(Long id) throws UserNotFound;
     List<User> allUserWithName(String name);
     User deleteUserWithId(Long id) throws UserNotFound;
+    Boolean isUserAlreadyInDb(User user) throws UserNotFound;
 }

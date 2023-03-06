@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface UserJPARepo extends JpaRepository<User, Long> {
 
-    List<User> findAllByName(String name);
+    List<User> findAllByUsername(String username);
+    List<User> findAllByPassword(String password);
 }
