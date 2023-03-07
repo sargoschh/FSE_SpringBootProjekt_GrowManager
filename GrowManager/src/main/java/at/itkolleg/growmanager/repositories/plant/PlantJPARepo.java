@@ -8,4 +8,5 @@ import java.util.List;
 public interface PlantJPARepo extends JpaRepository<Plant, Long> {
 
     List<Plant> findAllByName(String name);
+
 }
