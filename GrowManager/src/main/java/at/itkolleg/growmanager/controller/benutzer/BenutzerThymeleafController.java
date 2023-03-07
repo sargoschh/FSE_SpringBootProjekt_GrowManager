@@ -6,11 +6,14 @@ import at.itkolleg.growmanager.services.benutzer.BenutzerService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@CrossOrigin(allowedHeaders =
+        {"Orgin", "X-Requested-With", "Content-Type", "Accept", "Authorization"},
+        methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT,
+                RequestMethod.DELETE}
+)
 @RequestMapping("/growmanager")
 public class BenutzerThymeleafController {
 
@@ -32,6 +35,7 @@ public class BenutzerThymeleafController {
         model.addAttribute("user", user);
         return "user/login";
     }
+
 
     @PostMapping("/login")
     public String userLogin(@Valid Benutzer benutzer, Model model) {
