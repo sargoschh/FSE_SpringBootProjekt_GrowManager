@@ -22,7 +22,7 @@ public class Benutzer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @NotNull(message = "Der Name darf nicht leer sein!")
+
     @Size(min = 2, max = 255, message = "Der Name '${validatedValue}' ist ungültig. Namen müssen zwischen {min} und {max} Zeichen lang sein.")
     private String name;
 
