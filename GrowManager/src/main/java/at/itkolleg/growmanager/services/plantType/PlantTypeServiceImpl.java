@@ -4,6 +4,8 @@ import at.itkolleg.growmanager.domain.PlantType;
 import at.itkolleg.growmanager.exceptions.plantType.DuplicatedPlantTypeException;
 import at.itkolleg.growmanager.exceptions.plantType.PlantTypeNotFound;
 import at.itkolleg.growmanager.repositories.plantType.DbAccessPlantType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

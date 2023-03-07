@@ -2,10 +2,12 @@ package at.itkolleg.growmanager.controller.benutzer;
 
 import at.itkolleg.growmanager.domain.Benutzer;
 import at.itkolleg.growmanager.exceptions.benutzer.BenutzerNotFound;
+import at.itkolleg.growmanager.exceptions.benutzer.DuplicatedBenutzerException;
 import at.itkolleg.growmanager.services.benutzer.BenutzerService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,33 @@ public class BenutzerThymeleafController {
             }
         } catch (BenutzerNotFound e) {
             model.addAttribute("error", e.getMessage());
+            String meldung = "Benutzer unbekannt. Bitte überprüfen Sie Ihre " +
+                    "Zugangsdaten oder führen Sie eine Regestrierung durch!";
+            model.addAttribute("meldung", meldung);
+            return "error";
+        }
+    }
+
+    @GetMapping("/login/insert")
+    public String insertBenutzerForm(Model model) {
+        Benutzer benutzer = new Benutzer();
+        model.addAttribute("benutzer", benutzer);
+        return "user/insertBenutzer";
+    }
+
+    @PostMapping("/login/insert")
+    public String insertBenutzer(@Valid Benutzer benutzer, BindingResult bindingResult, Model model) {
+        try {
+            if(bindingResult.hasErrors()) {
+                return "user/insertBenutzer";
+            } else {
+                this.benutzerService.insertBenutzer(benutzer);
+                return "redirect:/growmanager";
+            }
+        } catch (DuplicatedBenutzerException e) {
+            model.addAttribute("error", e.getMessage());
+            String meldung = "Benutzer kann nicht eingefügt werden!";
+            model.addAttribute("meldung", meldung);
             return "error";
         }
     }

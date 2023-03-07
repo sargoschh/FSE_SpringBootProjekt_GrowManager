@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Insert User</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/styles.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div style="width:100%" class="row">
+          <div class="col-sm-6">
+            <h2>Manage <b>User</b></h2>
+          </div>
+          <div class="col-sm-6">
+            <a th:href="@{/growmanager}" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back to Login</span></a>
+          </div>
+        </div>
+      </div>
+      <form th:object="${benutzer}" th:action="@{/growmanager/login/insert}" method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name">
+          <div class="form-text" th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username">
+          <div class="form-text" th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Passwort</label>
+          <input type="password" class="form-control" id="password" name="password">
+          <div class="form-text" th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></div>
+        </div>
+
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Speichern</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

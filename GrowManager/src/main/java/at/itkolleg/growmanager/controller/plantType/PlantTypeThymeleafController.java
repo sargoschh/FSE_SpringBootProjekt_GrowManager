@@ -5,13 +5,16 @@ import at.itkolleg.growmanager.exceptions.plantType.DuplicatedPlantTypeException
 import at.itkolleg.growmanager.exceptions.plantType.PlantTypeNotFound;
 import at.itkolleg.growmanager.services.plantType.PlantTypeService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/growmanager/v1/plantTypes")
@@ -25,9 +28,21 @@ public class PlantTypeThymeleafController {
 
     @GetMapping
     public String getAllPlantTypes(Model model) {
-        model.addAttribute("allPlantTypes", this.plantTypeService.allPlantTypes());
+        model.addAttribute("plantTypes", this.plantTypeService.allPlantTypes());
         return "plantType/allPlantTypes";
     }
+
+    /*@GetMapping
+    public String showPlantTypesPage(Model model, @PageableDefault(size = 5) Pageable pageable) {
+        Page<PlantType> page = this.plantTypeService.allPlantTypes(pageable);
+        List<PlantType> plantTypes = page.getContent();
+
+        model.addAttribute("plantTypes", plantTypes);
+        model.addAttribute("currentPage", page.getNumber());
+        model.addAttribute("totalPages", page.getTotalPages());
+
+        return "plantType/allPlantTypes";
+    }*/
 
     @GetMapping("/insert")
     public String insertPlantTypeForm(Model model) {
