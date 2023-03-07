@@ -2,15 +2,13 @@ package at.itkolleg.growmanager.controller.benutzer;
 
 import at.itkolleg.growmanager.domain.Benutzer;
 import at.itkolleg.growmanager.exceptions.benutzer.BenutzerNotFound;
-import at.itkolleg.growmanager.exceptions.benutzer.DuplicatedBenutzerException;
 import at.itkolleg.growmanager.services.benutzer.BenutzerService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @Controller
 @RequestMapping("/growmanager")
@@ -34,6 +32,7 @@ public class BenutzerThymeleafController {
         model.addAttribute("user", user);
         return "user/login";
     }
+
 
     @PostMapping("/login")
     public String userLogin(@Valid Benutzer benutzer, Model model) {
