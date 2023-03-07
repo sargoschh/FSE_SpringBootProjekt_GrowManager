@@ -6,11 +6,12 @@ import at.itkolleg.growmanager.exceptions.water.DuplicatedWaterException;
 import at.itkolleg.growmanager.exceptions.water.WaterNotFound;
 import at.itkolleg.growmanager.repositories.water.DbAccessWater;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
-@Component
+@Service
 public class WaterServiceImpl implements WaterService{
 
     private DbAccessWater dbAccessWater;
@@ -35,6 +36,7 @@ public class WaterServiceImpl implements WaterService{
         waterFromDb.setAmountOfWater(water.getAmountOfWater());
         waterFromDb.setDate(water.getDate());
         waterFromDb.setComment(water.getComment());
+        waterFromDb.setDosageFertilizer(water.getDosageFertilizer());
         return this.dbAccessWater.saveWater(waterFromDb);
     }
 

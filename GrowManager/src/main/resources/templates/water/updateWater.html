@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update Water</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div style="width:100%" class="row">
+                    <div class="col-sm-6">
+                        <h2>Manage <b>Water</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a th:href="@{/growmanager/v1/waters}" class="btn btn-success" ><i class="material-icons">&#xe314;</i> <span>Back to Waters</span></a>
+                    </div>
+                </div>
+            </div>
+            <form th:object="${water}" th:action="@{/growmanager/v1/waters/update}" method="POST">
+                <div class="mb-3">
+                    <label for="id" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" th:field="*{id}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="grow" class="form-label">Plant</label>
+                    <input type="text" class="form-control" id="grow" name="grow" th:field="*{grow.plant.name}" readonly>
+                    <!--<div class="form-text" th:if="${#fields.hasErrors('type')}" th:errorclass="error" th:errors="*{type}"></div>-->
+                </div>
+                <div class="mb-3">
+                    <label for="amountOfWater" class="form-label">Wassermenge</label>
+                    <input type="number" step="0.1" class="form-control" id="amountOfWater" name="amountOfWater" th:field="*{amountOfWater}">
+                    <div class="form-text" th:if="${#fields.hasErrors('amountOfWater')}" th:errorclass="error" th:errors="*{amountOfWater}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="dosageFertilizer" class="form-label">Düngermenge</label>
+                    <input type="number" step="0.1" class="form-control" id="dosageFertilizer" name="dosageFertilizer" th:field="*{dosageFertilizer}">
+                    <div class="form-text" th:if="${#fields.hasErrors('dosageFertilizer')}" th:errorclass="error" th:errors="*{dosageFertilizer}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Datum</label>
+                    <input type="date" class="form-control" id="date" name="date" th:field="*{date}">
+                    <div class="form-text" th:if="${#fields.hasErrors('date')}" th:errorclass="error" th:errors="*{date}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Kommentar</label>
+                    <input type="text" class="form-control" id="comment" name="comment" th:field="*{comment}">
+                    <div class="form-text" th:if="${#fields.hasErrors('comment')}" th:errorclass="error" th:errors="*{comment}"></div>
+                </div>
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Speichern</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
