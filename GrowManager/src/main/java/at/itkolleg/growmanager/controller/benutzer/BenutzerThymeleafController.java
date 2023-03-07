@@ -9,11 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@CrossOrigin(allowedHeaders =
-        {"Orgin", "X-Requested-With", "Content-Type", "Accept", "Authorization"},
-        methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT,
-                RequestMethod.DELETE}
-)
 @RequestMapping("/growmanager")
 public class BenutzerThymeleafController {
 
