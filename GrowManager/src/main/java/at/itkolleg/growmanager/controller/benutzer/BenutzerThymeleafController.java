@@ -2,6 +2,7 @@ package at.itkolleg.growmanager.controller.benutzer;
 
 import at.itkolleg.growmanager.domain.Benutzer;
 import at.itkolleg.growmanager.exceptions.benutzer.BenutzerNotFound;
+import at.itkolleg.growmanager.exceptions.benutzer.DuplicatedBenutzerException;
 import at.itkolleg.growmanager.services.benutzer.BenutzerService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

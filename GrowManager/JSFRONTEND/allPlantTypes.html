@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <title>PlantTypes</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>PlantTypes</h1>
+        <hr class="border-2 border-top border-info">
+
+        <a href="insertPlantType.html" class="btn btn-info" role="button">PlantType hinzufügen</a>
+
+        <hr class="border-2 border-top border-info">
+
+        <table class="table" id="plantTypes"></table>
+
+
+    </div>
+
+</body>
+
+<script>
+
+    getAllData()
+
+
+    async function deleteStudent(id) {
+            try {
+
+                const response = await fetch('http://localhost:8080/growmanager/v1/plantTypes/' + id,
+                    {
+                        method: 'DELETE',
+                        cache: 'no-cache',
+                        header: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                const data = await response.json()
+                getAllData()
+
+
+            } catch (exception) {
+                alter("Fehler beim Löschen des PlantTypes!")
+            }
+        }
+
+
+
+
+
+    async function getAllData() {
+
+        try {
+            const response = await fetch('http://localhost:8080/growmanager/v1/plantTypes',
+                {
+                    method: 'GET',
+                    cache: 'no-cache',
+                    header: {
+                        'Accept': 'application/json'
+                    }
+                })
+            const data = await response.json()
+
+            const table = document.getElementById('plantTypes')
+            while (table.rows[0]) table.deleteRow(0)
+
+            var row = table.insertRow()
+            var id = row.insertCell(0)
+            var name = row.insertCell(1)
+            var action = row.insertCell(2)
+
+            id.innerHTML = 'ID'
+            name.innerHTML = 'Name'
+            plz.innerHTML = 'Postleitzahl'
+            action.innerHTML = 'Aktion'
+
+            data.forEach(plantType => {
+                var row = table.insertRow()
+                var id = row.insertCell(0)
+                var name = row.insertCell(1)
+                var action = row.insertCell(2)
+                id.innerHTML = plantType.id
+                name.innerHTML = plantType.name
+                action.innerHTML = `<a href="updatePlantType.html?id=${plantType.id}&name=${student.name}" class="btn btn-info" role="button">bearbeiten</a> <button type="button" class="btn btn-warning" onclick="deletePlantType(${plantType.id})">löschen</button>`
+            })
+            console.log(data)
+
+        } catch (exception) {
+            const table = document.getElementById('plantTypes')
+            table.innerHTML = "PlantTypes konnten nicht geladen werden"
+        }
+
+
+ 
+    }
+
+
+</script>
+
+
+</html>

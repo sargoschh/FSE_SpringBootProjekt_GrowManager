@@ -98,8 +98,10 @@ public class PlantTypeThymeleafController {
         try {
             this.plantTypeService.deletePlantTypeWithId(id);
             return "redirect:/growmanager/v1/plantTypes";
-        } catch (PlantTypeNotFound plantTypeNotFound) {
-            model.addAttribute("error", plantTypeNotFound.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            String meldung = "Pflanzentyp kann nicht gelöscht werden, solange er einer Pflanze zugeordnet ist!";
+            model.addAttribute("meldung", meldung);
             return "error";
         }
     }

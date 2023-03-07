@@ -40,6 +40,10 @@ public class Water {
 
     private String comment;
 
+    @ManyToOne
+    @JoinColumn(name = "fertilizer_id")
+    private Fertilizer fertilizer;
+
     @Min(1)
     @Max(1000)
     private Float dosageFertilizer;

@@ -1,11 +1,14 @@
 package at.itkolleg.growmanager.controller.water;
 
 
+import at.itkolleg.growmanager.domain.Fertilizer;
 import at.itkolleg.growmanager.domain.Grow;
 import at.itkolleg.growmanager.domain.Water;
+import at.itkolleg.growmanager.exceptions.fertilizer.FertilizerNotFound;
 import at.itkolleg.growmanager.exceptions.grow.GrowNotFound;
 import at.itkolleg.growmanager.exceptions.water.DuplicatedWaterException;
 import at.itkolleg.growmanager.exceptions.water.WaterNotFound;
+import at.itkolleg.growmanager.services.fertilizer.FertilizerService;
 import at.itkolleg.growmanager.services.grow.GrowService;
 import at.itkolleg.growmanager.services.water.WaterService;
 import jakarta.validation.Valid;
@@ -27,9 +30,12 @@ public class WaterThymeLeafController {
 
     private GrowService growService;
 
-    public WaterThymeLeafController(WaterService waterService, GrowService growService){
+    private FertilizerService fertilizerService;
+
+    public WaterThymeLeafController(WaterService waterService, GrowService growService, FertilizerService fertilizerService){
         this.waterService = waterService;
         this.growService = growService;
+        this.fertilizerService = fertilizerService;
     }
 
     @GetMapping
@@ -57,6 +63,8 @@ public class WaterThymeLeafController {
             Water water = new Water();
             water.setGrow(this.growService.growWithId(id));
             model.addAttribute("water", water);
+            List<Fertilizer> listFertilizer = this.fertilizerService.allFertilizer();
+            model.addAttribute("allFertilizers", listFertilizer);
             return "water/insertWater";
         } catch (GrowNotFound e) {
             model.addAttribute("error", e.getMessage());
@@ -72,6 +80,8 @@ public class WaterThymeLeafController {
         model.addAttribute("water", water);
         List<Grow> allGrows = this.growService.allGrows();
         model.addAttribute("allGrows", allGrows);
+        List<Fertilizer> listFertilizer = this.fertilizerService.allFertilizer();
+        model.addAttribute("allFertilizers", listFertilizer);
         return "water/insertWater";
     }
 
@@ -83,10 +93,12 @@ public class WaterThymeLeafController {
             if(bindingResult.hasErrors()){
                 return "water/insertWater";
             } else {
+                Fertilizer fertilizer = this.fertilizerService.fertilizerWithId(water.getFertilizer().getId());
+                water.setDosageFertilizer(fertilizer.getDosage() * water.getAmountOfWater());
                 this.waterService.insertWater(water);
                 return "redirect:/growmanager/v1/waters";
             }
-        } catch(DuplicatedWaterException e){
+        } catch (FertilizerNotFound | DuplicatedWaterException e) {
             model.addAttribute("error", e.getMessage());
             return "error";
         }

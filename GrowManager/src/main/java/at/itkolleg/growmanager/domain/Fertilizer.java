@@ -28,7 +28,7 @@ public class Fertilizer {
     @JoinColumn(name = "type_id")
     private FertilizerType type;
 
-    @Min(1)
+    @Min(0)
     @Max(1000)
     private Float dosage;
 

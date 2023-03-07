@@ -45,9 +45,12 @@
                     <div class="form-text" th:if="${#fields.hasErrors('amountOfWater')}" th:errorclass="error" th:errors="*{amountOfWater}"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="dosageFertilizer" class="form-label">Düngermenge</label>
-                    <input type="number" step="0.1" class="form-control" id="dosageFertilizer" name="dosageFertilizer">
-                    <div class="form-text" th:if="${#fields.hasErrors('dosageFertilizer')}" th:errorclass="error" th:errors="*{dosageFertilizer}"></div>
+                    <label for="fertilizer" class="form-label">Dünger</label>
+                    <select name="fertilizer.id" id="fertilizer" class="form-control">
+                        <option>---Bitte Auswählen---</option>
+                        <option th:each="fertilizer : ${allFertilizers}" th:value="${fertilizer.getId()}" th:text="${fertilizer.name}"></option>
+                    </select>
+                    <!--<div class="form-text" th:if="${#fields.hasErrors('type')}" th:errorclass="error" th:errors="*{type}"></div>-->
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Datum</label>

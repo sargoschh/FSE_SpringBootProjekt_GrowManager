@@ -51,7 +51,7 @@ public class FertilizerTypeThymeleafController {
         }
     }
 
-    @PostMapping("/update/{id}")
+    @GetMapping("/update/{id}")
     public String updatePlantTypeForm(@PathVariable Long id, Model model){
         try {
             FertilizerType fertilizerType = this.fertilizerTypeService.fertilizerTypeWithId(id);
@@ -82,8 +82,10 @@ public class FertilizerTypeThymeleafController {
         try {
             this.fertilizerTypeService.deleteFertilizerTypeWithId(id);
             return "redirect:/growmanager/v1/fertilizerTypes";
-        } catch (FertilizerTypeNotFound e) {
+        } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
+            String meldung = "Düngertyp kann nicht gelöscht werden, solange er einem Dünger zugeordnet ist!";
+            model.addAttribute("meldung", meldung);
             return "error";
         }
     }

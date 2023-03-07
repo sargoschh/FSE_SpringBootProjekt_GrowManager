@@ -91,8 +91,10 @@ public class FertilizerThymeleafController {
         try{
             this.fertilizerService.deleteFertilizerWithid(id);
             return "redirect:/growmanager/v1/fertilizers";
-        }catch(FertilizerNotFound e){
+        }catch(Exception e){
             model.addAttribute("error", e.getMessage());
+            String meldung = "Dünger kann nicht gelöscht werden, solange er einem Wasser zugeordnet ist!";
+            model.addAttribute("meldung", meldung);
             return "error";
         }
     }

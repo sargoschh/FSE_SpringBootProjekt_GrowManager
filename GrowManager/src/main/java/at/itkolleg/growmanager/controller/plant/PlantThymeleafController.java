@@ -39,6 +39,8 @@ public class PlantThymeleafController {
     public String insertPlantForm(Model model) {
         Plant plant = new Plant();
         model.addAttribute("plant", plant);
+        List<PlantType> plantTypes = this.plantTypeService.allPlantTypes();
+        model.addAttribute("plantTypes", plantTypes);
         return "plant/insertPlant";
     }
 
@@ -58,7 +60,7 @@ public class PlantThymeleafController {
         }
     }
 
-    /*@GetMapping("/update/{id}")
+    @GetMapping("/update/{id}")
     public String updatePlantForm(@PathVariable Long id, Model model) {
         try {
             Plant plant = this.plantService.plantWithId(id);
@@ -70,7 +72,7 @@ public class PlantThymeleafController {
             model.addAttribute("error", plantNotFound.getMessage());
             return "error";
         }
-    }*/
+    }
 
     @PostMapping("/update")
     public String updatePlant(@Valid Plant plant, BindingResult bindingResult) {
@@ -91,8 +93,10 @@ public class PlantThymeleafController {
         try {
             this.plantService.deletePlantWithId(id);
             return "redirect:/growmanager/v1/plants";
-        } catch (PlantNotFound plantNotFound) {
-            model.addAttribute("error", plantNotFound.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            String meldung = "Pflanze kann nicht gelöscht werden, solange er einem Fertilizer zugeordnet ist!";
+            model.addAttribute("meldung", meldung);
             return "error";
         }
     }

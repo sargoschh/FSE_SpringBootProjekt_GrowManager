@@ -105,8 +105,10 @@ public class GrowThymeleafController {
         try {
             this.growService.deleteGrowWithId(id);
             return "redirect:/growmanager/v1/grows";
-        } catch (GrowNotFound growNotFound) {
-            model.addAttribute("error", growNotFound.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            String meldung = "Grow kann nicht gelöscht werden, solange er anderen Tabellen zugeordnet ist!";
+            model.addAttribute("meldung", meldung);
             return "error";
         }
     }

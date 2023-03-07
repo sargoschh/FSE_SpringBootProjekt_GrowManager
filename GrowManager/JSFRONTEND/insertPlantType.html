@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantType hinzufügen</title>
+    <script src="jquery-3.6.3.min.js"></script>
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <h1>PlantType hinzufügen</h1>
+        <hr class="border-2 border-top border-info">
+
+        <a href="allPlantTypes.html" class="btn btn-info" role="button">All PlantTypes</a>
+
+        <hr class="border-2 border-top border-info">
+
+
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">NAME</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <div class="form-text" id="nameError"></div>
+            </div>
+
+
+        </form>
+        <button class="btn btn-warning" onclick="sendData()">hinzufügen</button>
+
+    </div>
+
+    <script>
+        async function sendData() {
+            const name = $('input[name=name]').val()
+
+            try {
+                const response = await fetch('http://localhost:8080/growmanager/v1/plantTypes',
+                    {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ "name": name})
+                    })
+                const data = await response.json()
+
+                $('#nameError').html('')
+
+                if (data.code && data.code == 9000 && data.formValidationErrors) {
+                    if (data.formValidationErrors.name) {
+                        $('#nameError').html(data.formValidationErrors.name)
+                    } 
+                } else {
+                    $('#name').val('')
+                    alert("PlantType eingefügt!")
+                }
+
+            } catch (exception)//Network-Error -> siehe fetch()-API-Dokumentation
+            {
+                alter("PlantType konnte nicht eingefügt werden: " + exception)
+            }
+
+
+
+
+        }
+    </script>
+
+
+</body>
+
+</html>

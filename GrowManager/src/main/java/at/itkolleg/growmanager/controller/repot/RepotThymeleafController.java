@@ -80,7 +80,7 @@ public class RepotThymeleafController {
                 return "repot/insertRepot";
             } else {
                 this.repotService.insertRepot(repot);
-                return "redirect:/growmanager/v1/repots";
+                return "redirect:/growmanager/v1/repots/" + repot.getGrow().getId();
             }
         } catch (DuplicatedRepotException e) {
             model.addAttribute("error", e.getMessage());
