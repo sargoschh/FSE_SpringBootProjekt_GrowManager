@@ -33,6 +33,7 @@ public class PlantServiceImpl implements PlantService {
         Plant plantFromDb = this.dbAccessPlant.plantWithId(plant.getId());
         plantFromDb.setName(plant.getName());
         plantFromDb.setType(plant.getType());
+        plantFromDb.setGrowthPeriod(plant.getGrowthPeriod());
         return this.dbAccessPlant.savePlant(plantFromDb);
     }
 

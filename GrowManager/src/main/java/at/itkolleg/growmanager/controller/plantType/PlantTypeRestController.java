@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/growmanager/v1/plantTypes")
+@RequestMapping("/growmanager/v1/web/plantTypes")
 //Erlaubt alle Anfragen von 127.0.0.1:5500!
 @CrossOrigin(origins = {"http://127.0.0.1:5500", "http://localhost:5500"})
 public class PlantTypeRestController {
@@ -28,13 +28,13 @@ public class PlantTypeRestController {
     }
 
     @GetMapping
-    //CURL-Call zum Testen: curl -H "Accept: application/json" localhost:8080/api/v1/studenten
+    //CURL-Call zum Testen: curl -H "Accept: application/json" localhost:8080/growmanager/v1/web/plantTypes
     public ResponseEntity<List<PlantType>> gibAlleStudenten() {
         return ResponseEntity.ok(this.plantTypeService.allPlantTypes());
     }
 
     @PostMapping
-    //CURL-Call zum Testen: curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{"name":"Günter Hasi 2","plz":"3322"}' http://localhost:8080/api/v1/studenten
+    //CURL-Call zum Testen: curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{"name":"Gemüse"}' http://localhost:8080/growmanager/v1/web/plantTypes
     public ResponseEntity<PlantType> insertPlantType(@Valid @RequestBody PlantType plantType, BindingResult bindingResult) throws PlantTypeValidationFailed, DuplicatedPlantTypeException {
         //    String errors = "";
         FormValidationExceptionDTO formValidationErrors = new FormValidationExceptionDTO("9000");
@@ -51,7 +51,7 @@ public class PlantTypeRestController {
     }
 
     @PutMapping
-    //CURL-Call zum Testen: curl -X PUT -H "Accept: application/json" -H "Content-Type: application/json" -d '{"name":"Günter Hasi","plz":"3322"}' http://localhost:8080/api/v1/studenten
+    //CURL-Call zum Testen: curl -X PUT -H "Accept: application/json" -H "Content-Type: application/json" -d '{"name":"Gemüse1"}' http://localhost:8080/growmanager/v1/web/plantTypes
     public ResponseEntity<PlantType> updatePlantType(@Valid @RequestBody PlantType plantType, BindingResult bindingResult) throws PlantTypeValidationFailed, PlantTypeNotFound, DuplicatedPlantTypeException {
         //    String errors = "";
         FormValidationExceptionDTO formValidationErrors = new FormValidationExceptionDTO("9000");

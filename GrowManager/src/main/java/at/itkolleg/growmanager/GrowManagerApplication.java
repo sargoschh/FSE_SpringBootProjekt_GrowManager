@@ -8,6 +8,7 @@ import at.itkolleg.growmanager.repositories.plant.DbAccessPlant;
 import at.itkolleg.growmanager.repositories.plantType.DbAccessPlantType;
 import at.itkolleg.growmanager.repositories.repot.DbAccessRepot;
 import at.itkolleg.growmanager.repositories.benutzer.DbAccessBenutzer;
+import at.itkolleg.growmanager.repositories.water.DbAccessWater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -39,6 +40,9 @@ public class GrowManagerApplication implements ApplicationRunner {
 
     @Autowired
     DbAccessBenutzer dbAccessUser;
+
+    @Autowired
+    DbAccessWater dbAccessWater;
 
 
     public static void main(String[] args) {
@@ -162,11 +166,23 @@ public class GrowManagerApplication implements ApplicationRunner {
         Grow rosen = new Grow(rose, date1, date1.plusDays(rose.getGrowthPeriod()), floatVal1, false, null);
         this.dbAccessGrow.saveGrow(rosen);
 
+        Repot repotRose = new Repot(rosen, 15F, LocalDate.of(2023, 03,15), "Alles Ok!");
+        this.dbAccessRepot.saveRepot(repotRose);
+
+        Water waterRose = new Water(rosen, 30F, LocalDate.of(2023, 03,15), "SuperDuper", 6F);
+        this.dbAccessWater.saveWater(waterRose);
+
         Plant tulpe = new Plant("Tulpe", blume, 30);
         this.dbAccessPlant.savePlant(tulpe);
 
         Grow tulpen = new Grow(tulpe, date2, date2.plusDays(tulpe.getGrowthPeriod()), floatVal2, false, null);
         this.dbAccessGrow.saveGrow(tulpen);
+
+        Repot repotTulpe = new Repot(tulpen, 18F, LocalDate.of(2023, 03,15), " Ok!");
+        this.dbAccessRepot.saveRepot(repotTulpe);
+
+        Water waterTulpe = new Water(tulpen, 36F, LocalDate.of(2023, 03,15), "SuperDuper", 4F);
+        this.dbAccessWater.saveWater(waterTulpe);
 
         Plant sonnenblume = new Plant("Sonnenblume", blume, 70);
         this.dbAccessPlant.savePlant(sonnenblume);

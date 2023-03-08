@@ -48,7 +48,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="dosage" class="form-label">Dosierung (in ml)</label>
-                    <input type="text" class="form-control" id="dosage" name="dosage" th:field="*{dosage}">
+                    <input type="number" step="0.1" class="form-control" id="dosage" name="dosage" th:field="*{dosage}">
                     <div class="form-text" th:if="${#fields.hasErrors('dosage')}" th:errorclass="error" th:errors="*{dosage}"></div>
                 </div>
 

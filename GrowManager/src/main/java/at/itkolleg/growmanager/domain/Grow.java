@@ -1,6 +1,8 @@
 package at.itkolleg.growmanager.domain;
 
+import at.itkolleg.growmanager.Assert;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -49,4 +51,12 @@ public class Grow {
         this.harvested = harvested;
         this.actualEndDate = actualEndDate;
     }
+
+    public void setStartDate(LocalDate startDate) {
+        if(Assert.validationDateBeforeToday(startDate)) {
+            this.startDate = startDate;
+        }
+    }
+
+
 }
