@@ -18,7 +18,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Water {
 
     @Id
@@ -26,7 +25,7 @@ public class Water {
     private Long id;
 
     @NotNull(message = "Es muss ein Grow angegeben werden!")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "grow_id")
     private Grow grow;
 

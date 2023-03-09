@@ -25,7 +25,7 @@ public class Grow {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plant_id")
     private Plant plant;
 

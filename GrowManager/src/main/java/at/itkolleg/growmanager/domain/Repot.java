@@ -20,7 +20,7 @@ public class Repot {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "grow_id")
     private Grow grow;
 

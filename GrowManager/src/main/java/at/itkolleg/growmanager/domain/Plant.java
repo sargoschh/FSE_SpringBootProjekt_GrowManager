@@ -24,7 +24,7 @@ public class Plant {
     @Size(min = 2, max = 255, message = "Der Pflanzenname '${validatedValue}' ist ungültig. Pflanzennamen müssen zwischen {min} und {max} Zeichen lang sein.")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
     private PlantType type;
 

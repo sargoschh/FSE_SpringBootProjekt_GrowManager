@@ -24,7 +24,7 @@ public class Fertilizer {
     @NotNull(message = "Der ")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
     private FertilizerType type;
 
