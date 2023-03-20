@@ -1,0 +1,28 @@
+CREATE TABLE `growmanager`.`planttype` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `growmanager`.`plant` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `type_id` INT NOT NULL , `growthPeriod` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `plant` ADD FOREIGN KEY (`type_id`) REFERENCES `planttype`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `growmanager`.`fertilizertype` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `growmanager`.`fertilizer` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `type_id` INT NOT NULL , `dosage` DECIMAL NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `fertilizer` ADD FOREIGN KEY (`type_id`) REFERENCES `fertilizertype`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `growmanager`.`grow` (`id` INT NOT NULL AUTO_INCREMENT , `plant_id` INT NOT NULL , `startDate` DATE NOT NULL , `estimatedEndDate` DATE NOT NULL , `potSize` DECIMAL NOT NULL , `harvested` TINYINT NOT NULL , `actualEndDate` DATE NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `grow` ADD FOREIGN KEY (`plant_id`) REFERENCES `plant`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `growmanager`.`water` (`id` INT NOT NULL AUTO_INCREMENT , `grow_id` INT NOT NULL , `amountOfWater` DECIMAL NOT NULL , `date` DATE NOT NULL , `comment` TEXT NOT NULL , `fertilizer_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `water` ADD FOREIGN KEY (`grow_id`) REFERENCES `grow`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `water` ADD FOREIGN KEY (`fertilizer_id`) REFERENCES `fertilizer`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `growmanager`.`repot` (`id` INT NOT NULL AUTO_INCREMENT , `grow_id` INT NOT NULL , `potSize` DECIMAL NOT NULL , `date` DATE NOT NULL , `comment` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `repot` ADD FOREIGN KEY (`grow_id`) REFERENCES `grow`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `growmanager`.`benutzer` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `username` VARCHAR(255) NOT NULL , `password` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
